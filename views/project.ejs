@@ -2,47 +2,201 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title><%= project ? project.name : 'Project' %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>
+      <%= project ? `${project.name} | Alex Draesner` : 'Project Not Found' %>
+    </title>
+
     <link href="/css/style.css" rel="stylesheet" />
   </head>
 
-  <body>
-    <nav>
-      <ul>
-        <li><a href="/home">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/projects">Projects</a></li>
-      </ul>
-    </nav>
+  <body class="project-detail-body">
+    <header class="site-header">
+      <a class="site-logo" href="/">Alex Draesner</a>
 
-    <main>
+      <nav class="site-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="/home">Overview</a></li>
+          <li><a href="/about">About Me</a></li>
+          <li><a class="active" href="/projects">Projects</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="project-detail-page">
       <% if (!project) { %>
-        <h1>Project not found</h1>
-        <p><a href="/projects">← Back to Projects</a></p>
-      <% } else { %>
+        <section class="project-not-found">
+          <p class="project-eyebrow">Project unavailable</p>
 
-        <h1><%= project.name %></h1>
-        <% if (project.image) { %>
-          <img src="<%= project.image %>" alt="<%= project.name %> image" />
-        <% } %>
+          <h1>Project not found</h1>
 
-        <!-- description (plain text + Notion link if present) -->
-        <% const d = project.description || '' %>
-        <% const m = d.match(/(https?:\/\/\S+)/) %>
-
-        <p><%= m ? d.replace(m[1], '').trim() : d %></p>
-
-        <% if (m) { %>
           <p>
-            <a href="<%= m[1].trim() %>" target="_blank" rel="noopener noreferrer">
-              See more photos on my Notion page →
-            </a>
+            This project may have been removed or the link may be incorrect.
           </p>
-        <% } %>
 
-        <p><a href="/projects">← Back to Projects</a></p>
+          <a class="project-button" href="/projects">
+            Back to projects
+          </a>
+        </section>
+      <% } else { %>
+        <% const description = project.description || '' %>
+        <% const notionMatch = description.match(/(https?:\/\/\S+)/) %>
+        <% const cleanDescription = notionMatch
+          ? description.replace(notionMatch[1], '').trim()
+          : description %>
 
+        <% let projectImage = project.image || null %>
+
+        <% if (project.slug === '3d-printing') {
+          projectImage = '/3d-pager.png'
+        } else if (project.slug === 'web-development') {
+          projectImage = '/alex-blog.png'
+        } %>
+
+        <a class="back-link" href="/projects">← Back to projects</a>
+
+        <section class="project-detail-hero">
+          <p class="project-eyebrow">Selected project</p>
+
+          <h1><%= project.name %></h1>
+
+          <% if (project.slug === '3d-printing') { %>
+            <p class="project-lead">
+              Exploring 3D design, physical prototyping, and iterative making
+              through a pager-inspired university project.
+            </p>
+          <% } else if (project.slug === 'web-development') { %>
+            <p class="project-lead">
+              A private full-stack blog project built to practise frontend
+              development, backend routing, templating, and user-focused
+              interface design.
+            </p>
+          <% } else { %>
+            <p class="project-lead">
+              Explore the process, tools, and learning behind this project.
+            </p>
+          <% } %>
+        </section>
+
+        <section class="project-detail-layout">
+          <figure class="project-image-card">
+            <% if (projectImage) { %>
+              <img
+                src="<%= projectImage %>"
+                alt="<%= project.name %> project preview"
+              />
+            <% } else { %>
+              <div class="project-image-placeholder">
+                <span><%= project.name %></span>
+              </div>
+            <% } %>
+
+            <figcaption>
+              <%= project.name %>
+            </figcaption>
+          </figure>
+
+          <article class="project-description-card">
+            <p class="project-card-label">Project overview</p>
+
+            <% if (project.slug === '3d-printing') { %>
+              <h2>From digital model to physical prototype</h2>
+
+              <p>
+                For my first university project, InsightOut, our team designed
+                pager-like devices inspired by Digimon.
+              </p>
+
+              <p>
+                I created the 3D models in my modelling application and
+                handled most of the printing. We developed and printed multiple
+                versions while refining the shape and design of the device.
+              </p>
+
+              <h3>My contribution</h3>
+
+              <ul class="project-detail-list">
+                <li>Created the 3D models for the pager-like device</li>
+                <li>Prepared and produced most of the printed parts</li>
+                <li>Iterated on the design through multiple versions</li>
+                <li>Helped turn a digital concept into a physical prototype</li>
+              </ul>
+
+              <div class="project-tags">
+                <span>3D design</span>
+                <span>3D printing</span>
+                <span>Prototyping</span>
+                <span>Iteration</span>
+              </div>
+
+              <% if (notionMatch) { %>
+                <a
+                  class="project-button"
+                  href="<%= notionMatch[1].trim() %>"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View the project gallery →
+                </a>
+              <% } %>
+
+            <% } else if (project.slug === 'web-development') { %>
+              <h2>Building a private full-stack blog</h2>
+
+              <p>
+                AlexBlog is a private blog project built with Node.js, Express,
+                EJS, HTML, and CSS. I created it to practise building a
+                server-rendered website with multiple pages and user-focused
+                content.
+              </p>
+
+              <p>
+                The project includes blog post pages, a contact form, Express
+                routes, EJS templates, and a themed interface. It is not
+                currently deployed publicly, so the image shows a local version
+                of the website.
+              </p>
+
+              <h3>What I practised</h3>
+
+              <ul class="project-detail-list">
+                <li>Creating routes with Node.js and Express</li>
+                <li>Rendering pages with EJS templates</li>
+                <li>Structuring pages with HTML and styling them with CSS</li>
+                <li>Building blog post and contact-page functionality</li>
+                <li>Organising a multi-page web application</li>
+              </ul>
+
+              <div class="project-tags">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+                <span>Node.js</span>
+                <span>Express</span>
+                <span>EJS</span>
+              </div>
+
+            <% } else { %>
+              <h2>Project overview</h2>
+
+              <p>
+                <%= cleanDescription || 'Project details coming soon.' %>
+              </p>
+
+              <% if (notionMatch) { %>
+                <a
+                  class="project-button"
+                  href="<%= notionMatch[1].trim() %>"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View more details →
+                </a>
+              <% } %>
+            <% } %>
+          </article>
+        </section>
       <% } %>
     </main>
   </body>
