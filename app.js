@@ -24,12 +24,21 @@ app.use('/js', express.static(path.join(__dirname, 'js')))
 // Admin authentication middleware
 const adminAuth = (req, res, next) => {
   const auth = req.headers.authorization
+
   if (!auth) {
     res.setHeader('WWW-Authenticate', 'Basic realm="Admin"')
     return res.status(401).send('Authentication required')
   }
-  const [username, password] = Buffer.from(auth.split(' ')[1], 'base64').toString().split(':')
-  if (username === process.env.ADMIN_USER && password === process.env.ADMIN_PASSWORD) {
+
+  const [username, password] = Buffer.from(
+    auth.split(' ')[1],
+    'base64'
+  ).toString().split(':')
+
+  if (
+    username === process.env.ADMIN_USER &&
+    password === process.env.ADMIN_PASSWORD
+  ) {
     next()
   } else {
     res.setHeader('WWW-Authenticate', 'Basic realm="Admin"')
@@ -41,6 +50,13 @@ const adminAuth = (req, res, next) => {
 app.get('/', pageController.getIndex)
 app.get('/home', pageController.getHome)
 app.get('/about', pageController.getAbout)
+
+// Protected admin project dashboard
+app.get(
+  '/admin/projects',
+  adminAuth,
+  projectController.getAdminProjects
+)
 
 // Project routes
 app.get('/projects', projectController.getProjects)

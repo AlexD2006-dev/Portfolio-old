@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>
-      <%= project ? `${project.name} | Alex Draesner` : 'Project Not Found' %>
+      <% if (!project) { %>
+        Project Not Found | Alex Draesner
+      <% } else if (project.slug === 'web-development') { %>
+        AlexBlog | Alex Draesner
+      <% } else { %>
+        <%= project.name %> | Alex Draesner
+      <% } %>
     </title>
 
     <link href="/css/style.css" rel="stylesheet" />
@@ -54,12 +60,18 @@
           projectImage = '/alex-blog.png'
         } %>
 
-        <a class="back-link" href="/projects">← Back to projects</a>
+        <% const displayName = project.slug === 'web-development'
+          ? 'AlexBlog'
+          : project.name %>
+
+        <a class="back-link" href="/projects">
+          ← Back to projects
+        </a>
 
         <section class="project-detail-hero">
           <p class="project-eyebrow">Selected project</p>
 
-          <h1><%= project.name %></h1>
+          <h1><%= displayName %></h1>
 
           <% if (project.slug === '3d-printing') { %>
             <p class="project-lead">
@@ -84,16 +96,16 @@
             <% if (projectImage) { %>
               <img
                 src="<%= projectImage %>"
-                alt="<%= project.name %> project preview"
+                alt="<%= displayName %> project preview"
               />
             <% } else { %>
               <div class="project-image-placeholder">
-                <span><%= project.name %></span>
+                <span><%= displayName %></span>
               </div>
             <% } %>
 
             <figcaption>
-              <%= project.name %>
+              <%= displayName %>
             </figcaption>
           </figure>
 

@@ -1,44 +1,139 @@
 <!doctype html>
-<html lang="en-US">
+<html lang="en">
   <head>
-    <link href="/css/style.css" rel="stylesheet" />
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Personal Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playwrite+NZ+Basic:wght@100..400&display=swap" rel="stylesheet">
-    <script async src="/js/main.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Overview | Alex Draesner</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playwrite+NZ+Basic:wght@100..400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link href="/css/style.css" rel="stylesheet" />
   </head>
-  <body>
-    <nav>
-      <ul>
-        <li><a href="/home">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/projects">Projects</a></li>
-      </ul>
-    </nav>
-    
-    <h1>Alex Draesner: Portfolio</h1>
-    <img src="/3d-pager.png" alt="My 3d Print" />
-    
-    <p>Project 1: 3d printing. This image is only a placeholder until I have more personal projects I have worked on to place here.<br>
-        I plan on adding onto my notion page with other projects I create over time.<br> 
-        For now I am featuring the following:</p>
-    
-    <ul>
-        <li> first website, created for my Web Technologies LU</li>
-        <li> 3d printed artefacts for my first Uni Project InsightOut</li>
-    </ul>
-    
-   
+
+  <body class="overview-body">
+    <header class="site-header">
+      <a class="site-logo" href="/">Alex Draesner</a>
+
+      <nav class="site-nav" aria-label="Main navigation">
+        <ul>
+          <li><a class="active" href="/home">Overview</a></li>
+          <li><a href="/about">About Me</a></li>
+          <li><a href="/projects">Projects</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="overview-page">
+      <section class="overview-hero">
+        <div class="overview-hero-text">
+          <p class="overview-eyebrow">Portfolio overview</p>
+
+          <h1>Learning by building.</h1>
+
+          <p class="overview-lead">
+            I’m a Software Engineering student at CODE University of Applied
+            Sciences in Berlin, building practical experience through web
+            development, full-stack projects, and creative technology.
+          </p>
+
+          <div class="overview-actions">
+            <a class="overview-button" href="/projects">
+              Explore my projects
+            </a>
+
+            <a
+              class="overview-button overview-button-secondary"
+              href="/about"
+            >
+              About me
+            </a>
+          </div>
+        </div>
+
+        <figure class="overview-image-card">
+          <img
+            src="/3d-pager.png"
+            alt="3D-printed pager-inspired device created by Alex Draesner"
+          />
+
+          <figcaption>
+            A 3D-printed pager-inspired device from my InsightOut project.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="overview-grid">
+        <article class="overview-card overview-card-highlight">
+          <p class="overview-card-label">Current direction</p>
+
+          <h2>Growing toward frontend development</h2>
+
+          <p>
+            I’m developing my skills in frontend development while learning
+            more about how interfaces connect with backend systems.
+          </p>
+
+          <a class="overview-card-link" href="/about">
+            Learn more about me →
+          </a>
+        </article>
+
+        <article class="overview-card">
+          <p class="overview-card-label">Web development</p>
+
+          <h2>From interface to backend</h2>
+
+          <p>
+            I have worked with HTML, CSS, JavaScript, Node.js, Express,
+            MongoDB, Mongoose, and EJS through coursework and personal
+            projects.
+          </p>
+
+          <a class="overview-card-link" href="/projects">
+            See my web projects →
+          </a>
+        </article>
+
+        <article class="overview-card">
+          <p class="overview-card-label">Creative technology</p>
+
+          <h2>Making ideas tangible</h2>
+
+          <p>
+            Through a university project, I explored 3D design, physical
+            prototyping, and 3D printing while creating a pager-inspired
+            device.
+          </p>
+
+          <a class="overview-card-link" href="/project/3d-printing">
+            View the 3D printing project →
+          </a>
+        </article>
+      </section>
+
+      <section class="overview-footer">
+        <div>
+          <p class="overview-card-label">Explore further</p>
+
+          <h2>See what I’ve been working on</h2>
+
+          <p>
+            Visit the projects page to learn more about my development work and
+            the skills I practised along the way.
+          </p>
+        </div>
+
+        <a class="overview-button" href="/projects">View projects</a>
+      </section>
+    </main>
   </body>
 </html>
-
-
-
-
-
 
 
 

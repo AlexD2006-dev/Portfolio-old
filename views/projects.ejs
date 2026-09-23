@@ -17,16 +17,23 @@
         </p>
       </header>
 
-      <section class="projects-list-section" aria-labelledby="projects-heading">
+      <section
+        class="projects-list-section"
+        aria-labelledby="projects-heading"
+      >
         <div class="section-heading">
           <p class="section-label">Explore my work</p>
-          <h2 id="projects-heading">Things I’ve built and explored</h2>
+
+          <h2 id="projects-heading">
+            Things I’ve built and explored
+          </h2>
         </div>
 
         <div class="projects-grid">
           <% if (projects.length === 0) { %>
             <article class="projects-empty-state">
               <h2>No projects yet</h2>
+
               <p>
                 Projects will appear here once they have been added.
               </p>
@@ -35,15 +42,13 @@
             <% projects.forEach(function(project) { %>
               <% const description = project.description || '' %>
               <% const notionMatch = description.match(/(https?:\/\/\S+)/) %>
-              <% const cleanDescription = notionMatch
-                ? description.replace(notionMatch[1], '').trim()
-                : description %>
 
-              <% let fallbackImage = null %>
+              <% let projectImage = project.image || null %>
+
               <% if (project.slug === '3d-printing') {
-                fallbackImage = '/3d-pager.png'
+                projectImage = '/3d-pager.png'
               } else if (project.slug === 'web-development') {
-                fallbackImage = '/website-code.png'
+                projectImage = '/alex-blog.png'
               } %>
 
               <article class="project-card">
@@ -52,9 +57,9 @@
                   href="/project/<%= project.slug %>"
                   aria-label="View <%= project.name %> project"
                 >
-                  <% if (project.image || fallbackImage) { %>
+                  <% if (projectImage) { %>
                     <img
-                      src="<%= project.image || fallbackImage %>"
+                      src="<%= projectImage %>"
                       alt="<%= project.name %> project preview"
                     />
                   <% } else { %>
@@ -69,13 +74,33 @@
 
                   <h3>
                     <a href="/project/<%= project.slug %>">
-                      <%= project.name %>
+                      <% if (project.slug === '3d-printing') { %>
+                        3D Printing — InsightOut
+                      <% } else if (project.slug === 'web-development') { %>
+                        AlexBlog
+                      <% } else { %>
+                        <%= project.name %>
+                      <% } %>
                     </a>
                   </h3>
 
-                  <p class="project-card-description">
-                    <%= cleanDescription || 'Explore this project to learn more.' %>
-                  </p>
+                  <% if (project.slug === '3d-printing') { %>
+                    <p class="project-card-description">
+                      A university project exploring 3D design, physical
+                      prototyping, and 3D printing. I created the models,
+                      handled most of the printing, and iterated on the design.
+                    </p>
+                  <% } else if (project.slug === 'web-development') { %>
+                    <p class="project-card-description">
+                      A private full-stack blog built with Node.js, Express,
+                      EJS, HTML, and CSS. It includes multiple pages, blog
+                      content, and a contact form.
+                    </p>
+                  <% } else { %>
+                    <p class="project-card-description">
+                      <%= description || 'Explore this project to learn more.' %>
+                    </p>
+                  <% } %>
 
                   <div class="project-card-footer">
                     <a
@@ -96,17 +121,6 @@
                       </a>
                     <% } %>
                   </div>
-
-                  <div class="project-admin-actions">
-                    <a href="/project/<%= project.slug %>/edit">Edit</a>
-
-                    <form
-                      action="/project/<%= project.slug %>/delete"
-                      method="POST"
-                    >
-                      <button type="submit">Delete</button>
-                    </form>
-                  </div>
                 </div>
               </article>
             <% }) %>
@@ -125,10 +139,6 @@
             coursework and personal practice.
           </p>
         </div>
-
-        <a class="projects-add-button" href="/projects/new">
-          Add new project
-        </a>
       </section>
     </main>
   </body>

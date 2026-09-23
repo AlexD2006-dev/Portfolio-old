@@ -1,9 +1,25 @@
 const Project = require('../models/Project')
 
-// List all projects
+// Public project listing
 exports.getProjects = async (req, res) => {
-  const projects = await Project.find()
-  res.render('projects', { projects })
+  try {
+    const projects = await Project.find()
+    res.render('projects', { projects })
+  } catch (error) {
+    console.error(error)
+    res.status(500).send('Could not load projects.')
+  }
+}
+
+// Protected admin project dashboard
+exports.getAdminProjects = async (req, res) => {
+  try {
+    const projects = await Project.find()
+    res.render('admin-projects', { projects })
+  } catch (error) {
+    console.error(error)
+    res.status(500).send('Could not load the admin dashboard.')
+  }
 }
 
 // Show form to create a new project
@@ -20,6 +36,7 @@ exports.postNewProject = async (req, res) => {
       description: req.body.description,
       image: req.body.image
     })
+
     await project.save()
     res.redirect('/projects')
   } catch (error) {
@@ -32,7 +49,11 @@ exports.postNewProject = async (req, res) => {
 exports.getEditProject = async (req, res) => {
   try {
     const project = await Project.findOne({ slug: req.params.slug })
-    if (!project) throw new Error('Project not found')
+
+    if (!project) {
+      throw new Error('Project not found')
+    }
+
     res.render('edit-project', { project })
   } catch (error) {
     console.error(error)
@@ -53,6 +74,7 @@ exports.postEditProject = async (req, res) => {
       },
       { new: true }
     )
+
     res.redirect('/projects')
   } catch (error) {
     console.error(error)
@@ -76,9 +98,10 @@ exports.getProject = async (req, res) => {
   try {
     const slug = req.params.projectName
     const project = await Project.findOne({ slug })
+
     res.render('project', { project })
-  } catch (err) {
-    console.error(err)
+  } catch (error) {
+    console.error(error)
     res.status(500).send('Server error')
   }
 }

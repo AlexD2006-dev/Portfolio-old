@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <%- include('partials/header', { title: 'Admin Dashboard | Alex Draesner' }) %>
+
+  <body class="admin-body">
+    <header class="site-header">
+      <a class="site-logo" href="/">Alex Draesner</a>
+
+      <nav class="site-nav" aria-label="Admin navigation">
+        <ul>
+          <li><a href="/projects">Public projects</a></li>
+          <li><a class="active" href="/admin/projects">Admin dashboard</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="admin-page">
+      <section class="admin-hero">
+        <p class="admin-eyebrow">Private area</p>
+
+        <h1>Project dashboard</h1>
+
+        <p>
+          Add, edit, or remove the projects displayed on the public portfolio.
+        </p>
+
+        <a class="admin-primary-button" href="/projects/new">
+          Add new project
+        </a>
+      </section>
+
+      <section class="admin-projects-section" aria-labelledby="admin-projects-heading">
+        <div class="admin-section-heading">
+          <p class="admin-section-label">Content management</p>
+
+          <h2 id="admin-projects-heading">Your projects</h2>
+        </div>
+
+        <% if (projects.length === 0) { %>
+          <article class="admin-empty-state">
+            <h2>No projects yet</h2>
+
+            <p>
+              Use the button above to add your first project.
+            </p>
+          </article>
+        <% } else { %>
+          <div class="admin-project-list">
+            <% projects.forEach(function(project) { %>
+              <article class="admin-project-row">
+                <div class="admin-project-information">
+                  <p class="admin-project-label">Project</p>
+
+                  <h3><%= project.name %></h3>
+
+                  <p class="admin-project-slug">
+                    /project/<%= project.slug %>
+                  </p>
+                </div>
+
+                <div class="admin-project-actions">
+                  <a
+                    class="admin-view-button"
+                    href="/project/<%= project.slug %>"
+                  >
+                    View
+                  </a>
+
+                  <a
+                    class="admin-edit-button"
+                    href="/project/<%= project.slug %>/edit"
+                  >
+                    Edit
+                  </a>
+
+                  <form
+                    action="/project/<%= project.slug %>/delete"
+                    method="POST"
+                    onsubmit="return confirm('Are you sure you want to delete this project?')"
+                  >
+                    <button class="admin-delete-button" type="submit">
+                      Delete
+                    </button>
+                  </form>
+                </div>
+              </article>
+            <% }) %>
+          </div>
+        <% } %>
+      </section>
+    </main>
+  </body>
+</html>
