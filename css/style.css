@@ -103,3 +103,119 @@ nav ul li a:hover {
     font-size: 14px;
   }
 }
+
+/* Landing page */
+
+.landing-body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 24px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0d1714;
+  color: #f1f3e8;
+}
+
+.landing-page {
+  width: min(760px, 100%);
+  padding: 56px 40px;
+  box-sizing: border-box;
+  text-align: center;
+  background-color: #14231d;
+  border: 1px solid #365247;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.landing-eyebrow {
+  margin: 0 0 14px;
+  color: #9fc8ad;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.landing-page h1 {
+  margin: 0;
+  padding: 0;
+  color: #f1f3e8;
+  font-size: clamp(36px, 6vw, 60px);
+  line-height: 1.15;
+  text-shadow: none;
+}
+
+.landing-intro {
+  max-width: 590px;
+  margin: 22px auto 0;
+  color: #c7d3cc;
+  font-size: 18px;
+  line-height: 1.7;
+  letter-spacing: 0;
+}
+
+.landing-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 34px;
+  margin-bottom: 0;
+}
+
+.landing-button {
+  display: inline-block;
+  min-width: 140px;
+  padding: 13px 20px;
+  box-sizing: border-box;
+  border: 1px solid #73a987;
+  border-radius: 8px;
+  background-color: #2f7d57;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.landing-button:hover {
+  background-color: #256244;
+  border-color: #b8d8c4;
+  transform: translateY(-2px);
+}
+
+.landing-button-secondary {
+  background-color: transparent;
+  color: #c9d9cf;
+}
+
+.landing-button-secondary:hover {
+  background-color: #203f31;
+  color: #f1f3e8;
+}
+
+.landing-button:focus-visible {
+  outline: 3px solid rgba(159, 200, 173, 0.6);
+  outline-offset: 3px;
+}
+
+@media (max-width: 520px) {
+  .landing-page {
+    padding: 40px 22px;
+  }
+
+  .landing-buttons {
+    flex-direction: column;
+  }
+
+  .landing-button {
+    width: 100%;
+  }
+}
