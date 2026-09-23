@@ -1,39 +1,135 @@
 <!doctype html>
-<html lang="en-US">
-  <%- include('partials/header', { title: 'Projects' }) %>
-  <body>
+<html lang="en">
+  <%- include('partials/header', { title: 'Projects | Alex Draesner' }) %>
+
+  <body class="projects-body">
     <%- include('partials/nav') %>
 
-    <h1>Alex Draesner: Portfolio</h1>
-    <img src="/3d-pager.png" alt="My 3d Print" />
-    
-    <h1>My Projects</h1>
+    <main class="projects-page">
+      <header class="projects-hero">
+        <p class="projects-eyebrow">Selected work</p>
 
-    <section id="projects-list">
-      <ul>
-        <% if (projects.length === 0) { %>
-          <li><p>No projects yet.</p></li>
-        <% } else { %>
-          <% projects.forEach(function(project) { %>
-            <li>
-              <h2><a href="/project/<%= project.slug %>"><%= project.name %></a></h2>
+        <h1>Projects</h1>
 
-              <% const d = project.description || '' %>
-              <% const m = d.match(/(https?:\/\/\S+)/) %>
-              <p><%= m ? d.replace(m[1], '').trim() : d %></p>
+        <p class="projects-intro">
+          A selection of projects from my Software Engineering studies and
+          personal development work.
+        </p>
+      </header>
 
-              <a href="/project/<%= project.slug %>/edit">Edit</a> |
-              <form action="/project/<%= project.slug %>/delete" method="POST" style="display:inline;">
-                <button type="submit">Delete</button>
-              </form>
-            </li>
-          <% }) %>
-        <% } %>
-      </ul>
-    </section>
+      <section class="projects-list-section" aria-labelledby="projects-heading">
+        <div class="section-heading">
+          <p class="section-label">Explore my work</p>
+          <h2 id="projects-heading">Things I’ve built and explored</h2>
+        </div>
 
-    <a href="/projects/new">+ Add New Project</a>
+        <div class="projects-grid">
+          <% if (projects.length === 0) { %>
+            <article class="projects-empty-state">
+              <h2>No projects yet</h2>
+              <p>
+                Projects will appear here once they have been added.
+              </p>
+            </article>
+          <% } else { %>
+            <% projects.forEach(function(project) { %>
+              <% const description = project.description || '' %>
+              <% const notionMatch = description.match(/(https?:\/\/\S+)/) %>
+              <% const cleanDescription = notionMatch
+                ? description.replace(notionMatch[1], '').trim()
+                : description %>
 
+              <% let fallbackImage = null %>
+              <% if (project.slug === '3d-printing') {
+                fallbackImage = '/3d-pager.png'
+              } else if (project.slug === 'web-development') {
+                fallbackImage = '/website-code.png'
+              } %>
+
+              <article class="project-card">
+                <a
+                  class="project-card-visual"
+                  href="/project/<%= project.slug %>"
+                  aria-label="View <%= project.name %> project"
+                >
+                  <% if (project.image || fallbackImage) { %>
+                    <img
+                      src="<%= project.image || fallbackImage %>"
+                      alt="<%= project.name %> project preview"
+                    />
+                  <% } else { %>
+                    <span class="project-card-placeholder">
+                      <%= project.name %>
+                    </span>
+                  <% } %>
+                </a>
+
+                <div class="project-card-content">
+                  <p class="project-card-label">Project</p>
+
+                  <h3>
+                    <a href="/project/<%= project.slug %>">
+                      <%= project.name %>
+                    </a>
+                  </h3>
+
+                  <p class="project-card-description">
+                    <%= cleanDescription || 'Explore this project to learn more.' %>
+                  </p>
+
+                  <div class="project-card-footer">
+                    <a
+                      class="project-card-link"
+                      href="/project/<%= project.slug %>"
+                    >
+                      View project →
+                    </a>
+
+                    <% if (notionMatch) { %>
+                      <a
+                        class="project-card-external-link"
+                        href="<%= notionMatch[1].trim() %>"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        More details
+                      </a>
+                    <% } %>
+                  </div>
+
+                  <div class="project-admin-actions">
+                    <a href="/project/<%= project.slug %>/edit">Edit</a>
+
+                    <form
+                      action="/project/<%= project.slug %>/delete"
+                      method="POST"
+                    >
+                      <button type="submit">Delete</button>
+                    </form>
+                  </div>
+                </div>
+              </article>
+            <% }) %>
+          <% } %>
+        </div>
+      </section>
+
+      <section class="projects-footer">
+        <div>
+          <p class="section-label">More to come</p>
+
+          <h2>Continuing to build</h2>
+
+          <p>
+            I’m continuing to add projects as I develop my skills through
+            coursework and personal practice.
+          </p>
+        </div>
+
+        <a class="projects-add-button" href="/projects/new">
+          Add new project
+        </a>
+      </section>
+    </main>
   </body>
 </html>
-
