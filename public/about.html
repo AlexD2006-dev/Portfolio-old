@@ -1,32 +1,118 @@
 <!doctype html>
-<html lang="en-US">
+<html lang="en">
   <head>
-    <link href="/css/style.css" rel="stylesheet" />
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>About Me - Alex's Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playwrite+NZ+Basic:wght@100..400&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>About Me | Alex Draesner</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playwrite+NZ+Basic:wght@100..400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link href="/css/style.css" rel="stylesheet" />
     <script async src="/js/main.js"></script>
   </head>
-  <body>
-    <nav>
-      <ul>
-        <li><a href="/home">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/projects">Projects</a></li>
-      </ul>
-    </nav>
-    
-    <h1>Alex Draesner: Portfolio</h1>
-    <img src="/3d-pager.png" alt="My 3d Print" />
-    
-    <h1>About Me</h1>
-    <p>Hi! I'm Alex Draesner, a student at CODE University studying Software Engineering.
-    I'm passionate about creating cool things, for example a 3D printed pager. I'm currently practicing web development and during my last project I learned how to 3D design,
-      as well as how to use a 3D printer.
-    </p>
-    
+
+  <body class="about-body">
+    <header class="site-header">
+      <a class="site-logo" href="/">Alex Draesner</a>
+
+      <nav class="site-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="/home">Overview</a></li>
+          <li><a class="active" href="/about">About Me</a></li>
+          <li><a href="/projects">Projects</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="about-page">
+      <section class="about-intro">
+        <p class="about-eyebrow">About me</p>
+
+        <h1>Building skills through projects.</h1>
+
+        <p class="about-lead">
+          I’m Alex Draesner, a Software Engineering student at CODE University
+          of Applied Sciences in Berlin.
+        </p>
+      </section>
+
+      <section class="about-feature">
+        <div class="about-image-card">
+          <img
+            src="/3d-pager.png"
+            alt="3D-printed pager created by Alex Draesner"
+          />
+
+          <p class="image-caption">
+            Click the image to switch between project visuals.
+          </p>
+        </div>
+
+        <div class="about-feature-text">
+          <p class="about-card-label">Creative technology</p>
+
+          <h2>Learning by making things</h2>
+
+          <p>
+            I enjoy working on projects that allow me to learn by doing. As
+            part of a university project, I explored 3D design and 3D printing
+            by creating a physical pager prototype.
+          </p>
+
+          <p>
+            The project introduced me to physical prototyping, iteration, and
+            turning an idea into a tangible result.
+          </p>
+        </div>
+      </section>
+
+      <section class="about-content">
+        <article class="about-card">
+          <p class="about-card-label">Web development</p>
+
+          <h2>Developing my foundation</h2>
+
+          <p>
+            I’m building my skills in frontend and full-stack web development.
+            Through coursework and personal projects, I have worked with HTML,
+            CSS, JavaScript, Node.js, Express, MongoDB, Mongoose, and EJS.
+          </p>
+
+          <p>
+            I’m also currently developing my React skills through my university
+            app project.
+          </p>
+        </article>
+
+        <article class="about-card">
+          <p class="about-card-label">Looking ahead</p>
+
+          <h2>Growing as a developer</h2>
+
+          <p>
+            I’m working toward an entry-level frontend development role where I
+            can contribute to useful, user-focused web experiences.
+          </p>
+
+          <p>
+            I’m especially interested in improving my frontend skills while
+            continuing to understand how frontend interfaces connect with
+            backend systems.
+          </p>
+        </article>
+      </section>
+
+      <section class="about-footer">
+        <h2>Want to see what I’ve built?</h2>
+
+        <a class="about-button" href="/projects">View my projects</a>
+      </section>
+    </main>
   </body>
 </html>
