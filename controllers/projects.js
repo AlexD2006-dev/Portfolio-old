@@ -72,7 +72,7 @@ exports.postEditProject = async (req, res) => {
         description: req.body.description,
         image: req.body.image
       },
-      { new: true }
+      { returnDocument: 'after' }
     )
 
     res.redirect('/projects')
