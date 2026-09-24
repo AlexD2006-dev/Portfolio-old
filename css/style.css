@@ -723,39 +723,6 @@ nav ul li a:hover {
   font-weight: 400;
 }
 
-/* Administrative controls */
-
-.project-admin-actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 24px;
-  padding-top: 14px;
-  border-top: 1px solid #294236;
-}
-
-.project-admin-actions a,
-.project-admin-actions button {
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: #809489;
-  font-family: inherit;
-  font-size: 13px;
-  letter-spacing: 0;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.project-admin-actions a:hover,
-.project-admin-actions button:hover {
-  color: #d2ded5;
-}
-
-.project-admin-actions form {
-  margin: 0;
-}
-
 /* Empty state */
 
 .projects-empty-state {
@@ -804,28 +771,6 @@ nav ul li a:hover {
   letter-spacing: 0;
 }
 
-.projects-add-button {
-  flex-shrink: 0;
-  padding: 12px 18px;
-  border: 1px solid #73a987;
-  border-radius: 8px;
-  background-color: #2f7d57;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.4;
-  letter-spacing: 0;
-  text-decoration: none;
-  transition:
-    background-color 0.2s ease,
-    transform 0.2s ease;
-}
-
-.projects-add-button:hover {
-  background-color: #256244;
-  transform: translateY(-2px);
-}
-
 /* Projects-page responsive layout */
 
 @media (max-width: 760px) {
@@ -849,12 +794,6 @@ nav ul li a:hover {
   .projects-footer {
     align-items: flex-start;
     flex-direction: column;
-  }
-
-  .projects-add-button {
-    width: 100%;
-    box-sizing: border-box;
-    text-align: center;
   }
 }
 
